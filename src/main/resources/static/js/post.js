@@ -28,7 +28,9 @@ async function write() {
         title: $("#title").val(),
         content: $("#content").val()
     }
+
     //console.log(writeDto);
+
     let response = await fetch("/s/post", {
         method: "POST",
         body: JSON.stringify(writeDto),
@@ -37,6 +39,7 @@ async function write() {
         }
     });
     let responseParse = await response.json();
+
     if (responseParse.code == 1) {
         alert("글쓰기 성공");
         location.href = "/";

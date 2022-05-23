@@ -6,6 +6,7 @@
     <!-- 게시글 아이템 시작 -->
     <div id="post-box">
 
+
     </div>
     <!-- 게시글 아이템 끝 -->
 
@@ -19,16 +20,19 @@
 
 <script>
     let page = 0;
+
     $("#btn-next").click(() => {
         page++;
         $("#post-box").empty();
         loading();
     });
+
     $("#btn-prev").click(() => {
         page--;
         $("#post-box").empty();
         loading();
     });
+
     // 페이징 완료!!
     function pagingDisable(responseParse) {
         if (responseParse.data.first == true) {
@@ -39,11 +43,14 @@
             $("#li-prev").removeClass("disabled");
         }
     }
+
     async function loading() {
         let response = await fetch(`/api/post?page=${page}`);
         let responseParse = await response.json();
+
         if (responseParse.code == 1) {
             pagingDisable(responseParse); // 페이징 버튼 활성화 처리
+
             //console.log(responseParse);
             responseParse.data.content.forEach((post) => {
                 //console.log(post);
@@ -53,6 +60,7 @@
             alert("잘못된 요청입니다");
         }
     }
+
     function postItemRender(post) {
         return `<div class="card mb-3">
             <div class="card-body">
@@ -61,7 +69,9 @@
             </div>
         </div>`;
     }
+
     loading();
+
 </script>
 
 

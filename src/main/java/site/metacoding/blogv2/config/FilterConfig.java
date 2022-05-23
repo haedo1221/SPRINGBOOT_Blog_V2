@@ -13,7 +13,6 @@ import site.metacoding.blogv2.config.filter.MyFilter2;
 // @Configuration
 public class FilterConfig {
 
-
     @Bean // IoC 컨테이너 필터 설정파일 등록
     public FilterRegistrationBean<?> filter1() {
         FilterRegistrationBean<MyFilter1> bean = new FilterRegistrationBean<>(new MyFilter1());

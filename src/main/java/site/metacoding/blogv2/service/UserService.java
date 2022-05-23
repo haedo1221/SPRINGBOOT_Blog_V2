@@ -1,7 +1,10 @@
 package site.metacoding.blogv2.service;
+
 import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.domain.user.User;
 import site.metacoding.blogv2.domain.user.UserRepository;
@@ -40,11 +43,15 @@ public class UserService {
             throw new RuntimeException("아이디를 찾을 수 없습니다.");
         }
     }
+
     @Transactional
     public void 회원가입(JoinDto joinDto) {
         // save하면 db에 insert하고 insert된 결과를 다시 return 해준다.
+
         userRepository.save(joinDto.toEntity());
+
     }
+
     public User 로그인(LoginDto loginDto) {
         // 로그인 처리 쿼리를 JPA에서 제공해주지 않는다.
         // SELECT * FROM user WHERE username=:username AND password = :password

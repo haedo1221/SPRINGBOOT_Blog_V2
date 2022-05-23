@@ -22,10 +22,10 @@ import site.metacoding.blogv2.web.api.dto.comment.CommentResponseDto;
 public class PostController {
     private final PostService postService;
     private final HttpSession session;
+
     @GetMapping("/post/{id}")
     public String detail(@PathVariable Integer id, Model model) {
         Post postEntity = postService.글상세보기(id);
-        
         User principal = (User) session.getAttribute("principal");
 
         List<CommentResponseDto> comments = new ArrayList<>();
@@ -51,12 +51,14 @@ public class PostController {
         model.addAttribute("postId", id);
         return "post/detail";
     }
+
     // 페이지를 줘
     // /s 붙었으니까 자동으로 인터셉터가 인증 체크함. (완)
     @GetMapping("/s/post/writeForm")
     public String writeForm() {
         return "post/writeForm";
     }
+
     @GetMapping({ "/", "/post" })
     public String home() {
         return "post/list";

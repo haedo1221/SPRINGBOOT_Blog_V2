@@ -1,4 +1,5 @@
 {{> /layout/header}}
+
 <!-- 컨테이너 시작 -->
 <div class="container mt-3">
 
@@ -28,6 +29,7 @@
         let id = $("#id").val();
         let response = await fetch(`/s/api/user/${id}`);
         let responseParse = await response.json();
+
         if (responseParse.code == 1) {
             // CSR 시작
             $("#username").val(responseParse.data.username);
@@ -43,4 +45,4 @@
 </script>
 
 <script src="/js/user.js"></script>
-{{> /layout/footer}} 
+{{> /layout/footer}}

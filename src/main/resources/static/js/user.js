@@ -2,6 +2,7 @@
 $("#btn-join").click(() => {
     join();
 });
+
 $("#btn-login").click(() => {
     login();
 });
@@ -38,26 +39,48 @@ async function update() {
     }
 }
 
-
 // 회원가입 요청 함수
 async function join() {
     // (1) username, password, email, addr 을 찾아서 오브젝트로 만든다.
     let joinDto = {
-@@ -48,7 +77,7 @@ async function join() {
+        username: $("#username").val(),
+        password: $("#password").val(),
+        email: $("#email").val(),
+        addr: $("#addr").val()
+    }
+
+    // (2) fetch 요청한다. (json으로 변환해서)
+    let response = await fetch("/join", {
+        method: "POST",
+        body: JSON.stringify(joinDto),
+        headers: {
+            'Content-Type': 'application/json; charset=utf-8'
+        },
+    });
+    let responseParse = await response.json();
+    console.log(responseParse);
+
+    // (3) 회원가입이 잘되면 알림창 띄우고 로그인 페이지로 이동한다.
+    if (responseParse.code == 1) {
+        alert("회원가입완료");
+        location.href = "/loginForm";
+    } else {
+        alert('회원가입실패');
     }
 }
-
 
 // 로그인 요청 함수
 async function login() {
 
     // checkbox의 체크여부를 제이쿼리에서 확인하는 법
     let checked = $('#remember').is(':checked');
+
     let loginDto = {
         username: $("#username").val(),
         password: $("#password").val(),
         remember: checked ? "on" : "off"
     }
+
     let response = await fetch("/login", {
         method: "POST",
         body: JSON.stringify(loginDto),
@@ -67,6 +90,7 @@ async function login() {
     });
     let responseParse = await response.json();
     console.log(responseParse);
+
     if (responseParse.code == 1) {
         alert("로그인완료");
         location.href = "/";
