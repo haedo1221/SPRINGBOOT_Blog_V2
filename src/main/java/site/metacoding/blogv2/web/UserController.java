@@ -1,11 +1,14 @@
 package site.metacoding.blogv2.web;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import lombok.RequiredArgsConstructor;
 import site.metacoding.blogv2.service.UserService;
-@@ -9,4 +10,16 @@
+
+@RequiredArgsConstructor
 @Controller
 public class UserController {
     private final UserService userService;
